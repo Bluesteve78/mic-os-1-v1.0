@@ -1,6 +1,6 @@
 # Makefile for MIC
-CC = x86_64-elf-gcc
-LD = x86_64-elf-ld
+CC = gcc
+LD = ld
 OBJCOPY = x86_64-elf-objcopy
 CFLAGS = -ffreestanding -O2 -mno-red-zone -Wall -Wextra -nostdlib -fno-builtin
 LDFLAGS = -T linker.ld -nostdlib
