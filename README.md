@@ -1,1 +1,12 @@
-# mic-os-1-v1.0
+
+---
+
+## `LICENSE` (MIT)
+```text
+MIT License
+
+Copyright (c) 2025
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+...
+[standard MIT text — paste full MIT license here]
