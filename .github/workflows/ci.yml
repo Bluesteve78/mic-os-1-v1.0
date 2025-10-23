@@ -1,0 +1,25 @@
+name: CI - build & smoke test
+
+on: [push, pull_request]
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-system-x86 grub-common xorriso gcc-multilib binutils-multiarch
+
+      - name: Build
+        run: make all
+
+      - name: Create ISO
+        run: make iso
+
+      - name: Smoke test: boot and check serial for "Hello from MIC!"
+        # run QEMU headless and assert serial output contains the string
+        run: |
+          timeout 20 bash -c "qemu-system-x86_64 -cdrom mic.iso -nographic -serial stdio | sed -u 's/\r//g' | grep -m1 'Hello from MIC!'" || (echo "MIC did not print expected message" && exit 1)
